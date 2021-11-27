@@ -54,7 +54,7 @@ public class TestsWithFiles {
         open(downloadPDFURL);
         File pdf = $(By.linkText("Скачать pdf")).download();
         PDF parsedPdf = new PDF(pdf);
-        Assertions.assertEquals(16, parsedPdf.numberOfPages);
+        Assertions.assertEquals(14, parsedPdf.numberOfPages);
     }
 
     String downloadXLSURL = "https://xn----9sbjebdr5a7bi8ipa.xn--p1ai/kalorijnost-produktov-tablicza-excel";
@@ -66,7 +66,6 @@ public class TestsWithFiles {
         File xls = $(By.linkText("Скачать таблицу калорийности продуктов в Excel")).download();
         XLS parsedXls = new XLS(xls);
         parsedXls.excel.getSheetAt(0).getRow(5).getCell(0).getStringCellValue().contains("Абрикосы");
-        assertTrue(contains("Copyright (c) 2021 Made Baruna"));
     }
 
     @Test
