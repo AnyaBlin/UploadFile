@@ -3,7 +3,6 @@ package filestests;
 import com.codeborne.pdftest.PDF;
 import com.codeborne.selenide.Condition;
 import com.codeborne.xlstest.XLS;
-import com.opencsv.CSVParser;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import org.apache.commons.io.IOUtils;
@@ -17,8 +16,8 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import static com.codeborne.selenide.Selenide.*;
-import static io.netty.util.internal.SystemPropertyUtil.contains;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -73,7 +72,7 @@ public class TestsWithFiles {
     void parseCSVFile() throws IOException, CsvException {
         ClassLoader classLoader = this.getClass().getClassLoader();
         try (InputStream is = classLoader.getResourceAsStream("csv.csv");
-            Reader reader = new InputStreamReader(is)) {
+             Reader reader = new InputStreamReader(is)) {
             CSVReader csvReader = new CSVReader(reader);
 
             List<String[]> strings = csvReader.readAll();
@@ -86,14 +85,14 @@ public class TestsWithFiles {
     void parseZIPFile() throws IOException, CsvException {
         ClassLoader classLoader = this.getClass().getClassLoader();
         try (InputStream is = classLoader.getResourceAsStream("csv.csv");
-            ZipInputStream zip = new ZipInputStream(is)) {
-                ZipEntry entry;
-                while ((entry = zip.getNextEntry()) != null) {
-                    System.out.println(entry.getName());
-                }
+             ZipInputStream zip = new ZipInputStream(is)) {
+            ZipEntry entry;
+            while ((entry = zip.getNextEntry()) != null) {
+                System.out.println(entry.getName());
             }
         }
     }
+}
 
 
 
